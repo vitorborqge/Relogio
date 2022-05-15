@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width-device-width, initial-scale=1.0" name="viewport">
+    <title>Relogio Diario</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+            font-family: "Roboto", sans-serif;
+
+        }
+
+
+        /* CSS do relógio */
+        .clock {
+            font-size: 28px;
+            border: solid 1px;
+            border-radius: 10px;
+            background-color: #121212;
+            padding: 2px 50px;
+            color: #fff;
+        }
+
+        /* .clock:hover {
+            transition: 0.6s;
+            background-color: #fff;
+            color: #121212;
+        } */
+
+
+        /* CSS do botão alterDay */
+        #alterDay {
+            font-size: 28px;
+            border: solid 1px;
+            border-radius: 10px;
+            background-color: #121212;
+            padding: 2px 50px;
+            color: #fff;
+        }
+
+        #alterDay:hover {
+            transition: 0.6s;
+            background-color: #fff;
+            color: #121212;
+        }
+    </style>
+</head>
+
+<body onload="clock()">
+
+    <!-- Título que irá comprimentar o usuário -->
+    <h1 id="greet">...</h1>
+
+    <!-- Mostra que horas são -->
+    <label class="clock" ></label>
+
+    <!-- Mostrar que dia é -->
+    <label id="alterDay" onclick="dayWeek()">Que dia é hoje?</label>
+    <script>
+
+        //Serve para comprimentar de acordo com o tempo
+        var greet = document.getElementById('greet')
+        var date = new Date()
+        var hours = date.getHours()
+
+        if (hours < 12) {
+            greet.innerHTML = 'Bom Dia!'
+        } else if (hours <= 18) {
+            greet.innerHTML = 'Boa Tarde!'
+        } else {
+            greet.innerHTML = 'Boa Noite!'
+        }
+
+
+
+        //Serve para mostrar no rótulo que dia é hoje
+        function dayWeek() {
+            var alterDay = document.getElementById('alterDay')
+            var date = new Date()
+            var dayWeek = date.getDay()
+
+            switch (dayWeek) {
+                case 0:
+                    alterDay.innerHTML = 'Domingo!'
+                    break
+                case 1:
+                    alterDay.innerHTML = 'Segunda!'
+                    break
+                case 2:
+                    alterDay.innerHTML = 'Terça!'
+                    break
+                case 3:
+                    alterDay.innerHTML = 'Quarta!'
+                    break
+                case 4:
+                    alterDay.innerHTML = 'Quinta!'
+                    break
+                case 5:
+                    alterDay.innerHTML = 'Sexta!'
+                    break
+                case 6:
+                    alterDay.innerHTML = 'Sabado!'
+                    break
+            }
+        }
+        function clock() {
+
+            //Obtém as horas, minutos e segundos
+            var date = new Date()
+            var hours = date.getHours()
+            var minutes = date.getMinutes()
+            var seconds = date.getSeconds()
+
+
+            //Serve para adicionar as horas, minutos e segundos no rótulo
+            if (hours < 10) {
+                hours = '0' + hours
+            } else if (minutes < 10) {
+                minutes = '0' + minutes
+            } else if (seconds < 10) {
+                seconds = '0' + seconds
+            }
+            //Serve para a estética do contador de horas
+            document.querySelector('.clock').innerHTML = hours + ':' + minutes + ':' + seconds
+        }
+
+        //Serve para executar a função clock() a cada segundo
+        window.setInterval('clock()', 1000)
+    </script>
+</body>
+
+</html>
